@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">InvertApp</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="startButtonText">Start ID</string>
+    <string name="browseButtonText">Browse All IDs</string>
+    <string name="aboutButtonText">About</string>
+    <string name="title_activity_id_session">IdSession</string>
+
+    <string name="IdSessionHeader">Invertebrate Identification</string>
+    <string name="questionsText">Questions appear here</string>
+    <string name="endOfId">Identification Complete!</string>
+
+    <string name="yesButtonText">Yes</string>
+    <string name="noButtonText">No</string>
+    <string name="nsButtonText">Not Sure</string>
+    <string name="showButtonText">Show IDs</string>
+    <string name="hideButtonText">Hide IDs</string>
+    <string name="helpButtonText">Help</string>
+    <string name="startOverButtonText">Start Over</string>
+</resources>

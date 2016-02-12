@@ -1,0 +1,38 @@
+Are there wings or wing pads present?
+Is the body narrow and slender?
+Is the body thick and stout?
+Is the body more than three times as long as it is wide?
+Was the invertebrate found in a lotic environment? (i.e. a river or stream)
+Was the invertebrate found in a lentic environment? (i.e. a lake or pond)
+Was the invertebrate found attached to a submerged rock?
+Are there external gills present?
+Are the gills on the abdomen?
+Are the gills on the thorax?
+Are the gills filamentous?
+Are the gills plate-like?
+Is the head distinct and well developed?
+Are the antennae visible and distinct from the body?
+Does the invertebrate have three pairs of jointed legs?
+Are there processes extending from the tip of the abdomen?
+Are there abdominal terminal hairs present?
+Is there one primary abdominal process?
+Are there 2 abdominal processes?
+Are there 3 abdominal processes?
+Are there more than 3 abdominal processes?
+Is/are the abdominal process(es) long and tail-like?
+Is/are the abdominal process(es) stubbed?
+Is/are the abdominal process(es) leaf-like?
+Do the abdominal processes have hooks?
+Is the invertebrate strongly patterned with two or more distinct colors?
+Does the invertebrate have distinct, visible eyes?
+Are there fan-like hairs extending from the head?
+Is the invertebrate primarily soft-bodied?
+Is the invertebrate primarily hard-bodied?
+Do the mouthparts have an elongated beak/sucker?
+Does one of the mouthparts cover the rest of the mouth from below?
+Is there a pair of claws at the end of each leg?
+Is there a single claw at the end of each leg?
+Is the invertebrate enclosed in a silk, mineral, or organic case?
+Does the body have deep lobes forming six distinct sections?
+Is the thorax broader than the abdomen?
+Are the antennae adapted for grasping?
