@@ -1,13 +1,21 @@
 package elem.invertapp;
 
+import android.app.Dialog;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.io.File;
@@ -21,9 +29,9 @@ public class IdSession extends AppCompatActivity {
             "slenderbody.jpg",
             "stoutbody.jpg",
             "longbody.jpg",
-            "default.jpg",
-            "default.jpg",
-            "default.jpg",
+            "defaultimg.jpg",
+            "defaultimg.jpg",
+            "defaultimg.jpg",
             "externalgills.jpg",
             "abdominalgills.jpg",
             "thoracicgills.jpg",
@@ -39,9 +47,9 @@ public class IdSession extends AppCompatActivity {
             "threeprocesses.jpg",
             "plusprocesses.jpg",
             "tailprocesses.jpg",
-            "default.jpg",
+            "defaultimg.jpg",
             "leafprocesses.jpg",
-            "default.jpg",
+            "defaultimg.jpg",
             "patterned.jpg",
             "distincteye.jpg",
             "fanhead.jpg",
@@ -55,7 +63,49 @@ public class IdSession extends AppCompatActivity {
             "deeplylobed.jpg",
             "broadthorax.jpg",
             "graspingantennae.jpg",
-            "default.jpg"
+            "defaultimg.jpg"
+
+    };
+    public static final String[] imageFiles2 = {
+            "wingpad",
+            "slenderbody",
+            "stoutbody",
+            "longbody",
+            "defaultimg",
+            "defaultimg",
+            "defaultimg",
+            "externalgills",
+            "abdominalgills",
+            "thoracicgills",
+            "filamentousgills",
+            "plategills",
+            "distincthead",
+            "antennae",
+            "jointedappendages",
+            "abdominalprocesses",
+            "terminalhairs",
+            "oneprocess",
+            "twoprocesses",
+            "threeprocesses",
+            "plusprocesses",
+            "tailprocesses",
+            "defaultimg",
+            "leafprocesses",
+            "defaultimg",
+            "patterned",
+            "distincteye",
+            "fanhead",
+            "softbody",
+            "hardbody",
+            "suckingmouth",
+            "labium",
+            "pairedclaws",
+            "singleclaw",
+            "cases",
+            "deeplylobed",
+            "broadthorax",
+            "graspingantennae",
+            "defaultimg"
 
     };
     public static final int numAttributes = 38;
@@ -136,6 +186,8 @@ public class IdSession extends AppCompatActivity {
             }//end if attribute false then remove
         }//end for whole idTree
         checkValidQuestion();
+        ImageView helpImageView = (ImageView) findViewById(R.id.helpImageView);
+        helpImageView.setVisibility(View.INVISIBLE);
     }
 
     public void noButtonClick(View view){
@@ -148,11 +200,15 @@ public class IdSession extends AppCompatActivity {
             }//end if attribute false then remove
         }//end for whole idTree
         checkValidQuestion();
+        ImageView helpImageView = (ImageView) findViewById(R.id.helpImageView);
+        helpImageView.setVisibility(View.INVISIBLE);
     }
 
     public void nsButtonClick(View view){
         questionCount++;
         checkValidQuestion();
+        ImageView helpImageView = (ImageView) findViewById(R.id.helpImageView);
+        helpImageView.setVisibility(View.INVISIBLE);
     }
 
     public void showButtonClick(View view){
@@ -163,13 +219,28 @@ public class IdSession extends AppCompatActivity {
 
     public void helpButtonClick(View view){
 
+        int imageResource = getResources().getIdentifier(imageFiles2[questionCount-1],"drawable",this.getPackageName());
+        System.out.println(imageFiles2[questionCount-1]);
+        System.out.println(questionCount);
+        ImageView helpImageView = (ImageView) findViewById(R.id.helpImageView);
+        helpImageView.setImageResource(imageResource);
+        hideShowStatus = -1;
+        showMe();
+        if(helpImageView.getVisibility() == View.VISIBLE) {
+            helpImageView.setVisibility(View.INVISIBLE);
+        }
+        else if(helpImageView.getVisibility() == View.INVISIBLE){
+            helpImageView.setVisibility(View.VISIBLE);
+        }
+
     }
 
     public void startOverButtonClick(View view){
         questionCount=0;
         initTrees();
         checkValidQuestion();
-
+        ImageView helpImageView = (ImageView) findViewById(R.id.helpImageView);
+        helpImageView.setVisibility(View.INVISIBLE);
     }
 
     public void endSession(){
@@ -202,6 +273,8 @@ public class IdSession extends AppCompatActivity {
             ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.listview_layout1, idArray);
             ListView listView = (ListView) findViewById(R.id.idList);
             listView.setAdapter(adapter);
+            ImageView helpImageView = (ImageView) findViewById(R.id.helpImageView);
+            helpImageView.setVisibility(View.INVISIBLE);
         }
         else{
             ((Button) findViewById(R.id.showButton)).setText(R.string.showButtonText);
