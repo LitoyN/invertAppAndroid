@@ -9,15 +9,17 @@ public class IdList {
     private class Node {
 
         private String data;
+        private Integer imageFile;
         private Node next;
 
-        public Node(String data, Node next) {
+        public Node(String data, Integer imageFile, Node next) {
             this.data = data;
+            this.imageFile = imageFile;
             this.next = next;
         }
 
-        public Node(String data) {
-            this(data, null);
+        public Node(String data, Integer imageFile) {
+            this(data, imageFile, null);
         }
 
         public Node() {
@@ -52,8 +54,8 @@ public class IdList {
         return getNodeBefore(index).next.data;
     }
 
-    public void add(String data) {
-        tail.next = new Node(data);
+    public void add(String data, Integer imageFile) {
+        tail.next = new Node(data, imageFile);
         tail = tail.next;
         size++;
     }

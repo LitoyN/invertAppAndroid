@@ -11,12 +11,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.File;
 import java.io.InputStream;
@@ -108,6 +111,17 @@ public class IdSession extends AppCompatActivity {
             "defaultimg"
 
     };
+
+    private Integer[] resultImages = {
+            R.drawable.tn1,R.drawable.tn2,
+            R.drawable.tn3, R.drawable.tn4,
+            R.drawable.tn5, R.drawable.tn6,
+            R.drawable.tn7, R.drawable.tn8,
+            R.drawable.tn9, R.drawable.tn10,
+            R.drawable.tn11, R.drawable.tn12,
+            R.drawable.tn13, R.drawable.tn14,
+            R.drawable.tn15, R.drawable.tn16
+    };
     public static final int numAttributes = 38;
     public static final String[] QUESTIONlabels = new String[numAttributes];
     public static final String filePath = "HelpImages2/";
@@ -159,7 +173,7 @@ public class IdSession extends AppCompatActivity {
         int[] attributeInt= new int[numAttributes];
         int q = 0;
         while(dataFile.hasNextLine()){
-            idTree.add(dataFile.next());
+            idTree.add(dataFile.next(), resultImages[q]);
             //System.out.println(idTree.get(q));
             for(int i=0; i<numAttributes; i++){
                 attributeInt[i]=dataFile.nextInt();
@@ -270,16 +284,30 @@ public class IdSession extends AppCompatActivity {
                 counter++;
             }
 
-            ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.listview_layout1, idArray);
-            ListView listView = (ListView) findViewById(R.id.idList);
-            listView.setAdapter(adapter);
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.gridview_layout1, idArray);
+            //ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.listview_layout1, idArray);
+            GridView gridView = (GridView) findViewById(R.id.idGrid);
+            gridView.setAdapter(new ImageAdapter(this, resultImages));
+            gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                public void onItemClick(AdapterView<?> parent, View v,
+                                        int position, long id) {
+                    Toast.makeText(IdSession.this, "" + position,
+                            Toast.LENGTH_SHORT).show();
+                }
+            });
+            //ListView listView = (ListView) findViewById(R.id.idList);
+            //gridView.setAdapter(adapter);
+            //listView.setAdapter(adapter);
             ImageView helpImageView = (ImageView) findViewById(R.id.helpImageView);
             helpImageView.setVisibility(View.INVISIBLE);
         }
         else{
             ((Button) findViewById(R.id.showButton)).setText(R.string.showButtonText);
-            ListView listView = (ListView) findViewById(R.id.idList);
-            listView.setAdapter(null);
+            GridView gridView = (GridView) findViewById(R.id.idGrid);
+            //ListView listView = (ListView) findViewById(R.id.idList);
+            gridView.setAdapter(null);
+            //listView.setAdapter(null);
+            //listView.setOnItemClickListener();
         }
     }
 
