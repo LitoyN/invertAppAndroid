@@ -19,4 +19,33 @@
     <string name="hideButtonText">Hide IDs</string>
     <string name="helpButtonText">Help</string>
     <string name="startOverButtonText">Start Over</string>
+    
+    <string-array name="idNames">
+        <item>Ephemeroptera </item>
+        <item>Odonata:Zygoptera </item>
+        <item>Odonata:Anisoptera </item>
+        <item>Plecoptera:Perlidae </item>
+        <item>Plecoptera:Pteronarcyidae </item>
+        <item>Plecoptera:Other </item>
+        <item>Hemiptera:Gerromorpha </item>
+        <item>Hemiptera:Nepidae </item>
+        <item>Hemiptera:Nepidae:Nepa </item>
+        <item>Hemiptera:Nepidae:Ranatra </item>
+        <item>Hemiptera:Belostomatidae </item>
+        <item>Hemiptera:Notonectidae </item>
+        <item>Hemiptera:Corixidae </item>
+        <item>Megaloptera:Corydalidae </item>
+        <item>Megaloptera:Sialidae </item>
+        <item>Trichoptera </item>
+        <item>Coleoptera:Adult </item>
+        <item>Coleoptera:Larva </item>
+        <item>Coleoptera:Psephenidae </item>
+        <item>Diptera </item>
+        <item>Diptera:Chironomidae </item>
+        <item>Diptera:Chaoboridae </item>
+        <item>Diptera:Blephariceridae </item>
+        <item>Diptera:Tipulidae </item>
+        <item>Diptera:Culicidae </item>
+        <item>Diptera:Simuliidae </item>
+    </string-array>
 </resources>

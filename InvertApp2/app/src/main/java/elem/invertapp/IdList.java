@@ -54,6 +54,10 @@ public class IdList {
         return getNodeBefore(index).next.data;
     }
 
+    public Integer getImage(int index){
+        return getNodeBefore(index).next.imageFile;
+    }
+
     public void add(String data, Integer imageFile) {
         tail.next = new Node(data, imageFile);
         tail = tail.next;

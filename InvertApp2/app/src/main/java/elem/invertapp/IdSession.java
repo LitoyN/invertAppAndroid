@@ -120,12 +120,19 @@ public class IdSession extends AppCompatActivity {
             R.drawable.tn9, R.drawable.tn10,
             R.drawable.tn11, R.drawable.tn12,
             R.drawable.tn13, R.drawable.tn14,
+            R.drawable.tn15, R.drawable.tn16,
+            R.drawable.tn6, R.drawable.tn16,
+            R.drawable.tn7, R.drawable.tn8,
+            R.drawable.tn9, R.drawable.tn10,
+            R.drawable.tn11, R.drawable.tn12,
+            R.drawable.tn13, R.drawable.tn14,
             R.drawable.tn15, R.drawable.tn16
     };
     public static final int numAttributes = 38;
     public static final String[] QUESTIONlabels = new String[numAttributes];
     public static final String filePath = "HelpImages2/";
     public static final String questionsPath = "questions.txt";
+    public static final String idsPath = "invertAppInfoMSDOS3.txt";
     InputStream dataFileStream;
     InputStream questionFileStream;
     Scanner dataFile;
@@ -152,7 +159,7 @@ public class IdSession extends AppCompatActivity {
         idTree = new IdList();
         attributeTree = new AttributeList();
         try{
-            dataFileStream = getAssets().open("invertAppInfoMSDOS3.txt");
+            dataFileStream = getAssets().open(idsPath);
 
         }
         catch(Exception e){
@@ -173,7 +180,7 @@ public class IdSession extends AppCompatActivity {
         int[] attributeInt= new int[numAttributes];
         int q = 0;
         while(dataFile.hasNextLine()){
-            idTree.add(dataFile.next(), resultImages[q]);
+            idTree.add(dataFile.next(), resultImages[q]); //instad, lets do dataFile.next() again, coding the image file into the data file
             //System.out.println(idTree.get(q));
             for(int i=0; i<numAttributes; i++){
                 attributeInt[i]=dataFile.nextInt();
@@ -276,10 +283,13 @@ public class IdSession extends AppCompatActivity {
             ((Button) findViewById(R.id.showButton)).setText(R.string.hideButtonText);
             int counter = 0;
             String[] idArray = new String[idTree.size() + 1];
+            Integer[] imageFileArray = new Integer[idTree.size() + 1];
             idArray[counter] = "Possible Identifications: ";
+            imageFileArray[counter] = 0;
             counter++;
             while (counter < idTree.size() + 1) {
                 idArray[counter] = idTree.get(counter - 1);
+                imageFileArray[counter] = idTree.getImage(counter - 1);
                 //System.out.println(idArray[counter - 1]);
                 counter++;
             }
@@ -287,7 +297,7 @@ public class IdSession extends AppCompatActivity {
             ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.gridview_layout1, idArray);
             //ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.listview_layout1, idArray);
             GridView gridView = (GridView) findViewById(R.id.idGrid);
-            gridView.setAdapter(new ImageAdapter(this, resultImages));
+            gridView.setAdapter(new ImageAdapter(this, imageFileArray));
             gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 public void onItemClick(AdapterView<?> parent, View v,
                                         int position, long id) {
