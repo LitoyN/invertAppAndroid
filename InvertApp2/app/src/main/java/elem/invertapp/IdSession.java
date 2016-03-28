@@ -113,7 +113,7 @@ public class IdSession extends AppCompatActivity {
     };
 
     private Integer[] resultImages = {
-            R.drawable.tn1,R.drawable.tn2,
+            R.drawable.tn0, R.drawable.tn1,R.drawable.tn2,
             R.drawable.tn3, R.drawable.tn4,
             R.drawable.tn5, R.drawable.tn6,
             R.drawable.tn7, R.drawable.tn8,
@@ -284,9 +284,9 @@ public class IdSession extends AppCompatActivity {
             int counter = 0;
             String[] idArray = new String[idTree.size() + 1];
             Integer[] imageFileArray = new Integer[idTree.size() + 1];
-            idArray[counter] = "Possible Identifications: ";
-            imageFileArray[counter] = 0;
-            counter++;
+            //idArray[counter] = "Possible Identifications: ";
+            //imageFileArray[counter] = 1;
+            //counter++;
             while (counter < idTree.size() + 1) {
                 idArray[counter] = idTree.get(counter - 1);
                 imageFileArray[counter] = idTree.getImage(counter - 1);
@@ -294,7 +294,6 @@ public class IdSession extends AppCompatActivity {
                 counter++;
             }
 
-            ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.gridview_layout1, idArray);
             //ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.listview_layout1, idArray);
             GridView gridView = (GridView) findViewById(R.id.idGrid);
             gridView.setAdapter(new ImageAdapter(this, imageFileArray));
