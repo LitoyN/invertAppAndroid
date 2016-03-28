@@ -12,15 +12,15 @@
         android:id="@+id/startIDbutton"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="162dp"
-        android:textSize="24dp"
+        android:layout_marginTop="150dp"
+        android:textSize="24sp"
         android:onClick="startIdButtonClick" />
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/browseButtonText"
         android:id="@+id/browseButton"
-        android:textSize="24dp"
+        android:textSize="24sp"
         android:layout_below="@+id/startIDbutton"
         android:layout_centerHorizontal="true" />
     <Button
@@ -28,7 +28,7 @@
         android:layout_height="wrap_content"
         android:text="@string/aboutButtonText"
         android:id="@+id/aboutButton"
-        android:textSize="24dp"
+        android:textSize="24sp"
         android:layout_below="@+id/browseButton"
         android:layout_centerHorizontal="true" />
 </RelativeLayout>

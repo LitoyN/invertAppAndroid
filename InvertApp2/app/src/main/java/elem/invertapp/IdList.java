@@ -9,28 +9,30 @@ public class IdList {
     private class Node {
 
         private String data;
-        private Integer imageFile;
+        private Integer imageFull;
+        private Integer imageTn;
         private Node next;
 
-        public Node(String data, Integer imageFile, Node next) {
+        public Node(String data, Integer imageFull, Integer imageTn, Node next) {
             this.data = data;
-            this.imageFile = imageFile;
+            this.imageFull = imageFull;
+            this.imageTn = imageTn;
             this.next = next;
         }
 
-        public Node(String data, Integer imageFile) {
-            this(data, imageFile, null);
+        public Node(String data, Integer imageFull, Integer imageTn) {
+            this(data, imageFull, imageTn, null);
         }
 
         public Node() {
-            this(null, null);
+            this(null, null, null);
         }
     }
-    
+
     private Node head;
     private Node tail;
     private int size;
-    
+
     public IdList() {
         head = new Node();
         tail = head;
@@ -54,12 +56,16 @@ public class IdList {
         return getNodeBefore(index).next.data;
     }
 
-    public Integer getImage(int index){
-        return getNodeBefore(index).next.imageFile;
+    public Integer getImageFull(int index){
+        return getNodeBefore(index).next.imageFull;
     }
 
-    public void add(String data, Integer imageFile) {
-        tail.next = new Node(data, imageFile);
+    public Integer getImageTn(int index){
+        return getNodeBefore(index).next.imageTn;
+    }
+
+    public void add(String data, Integer imageFull, Integer imageTn) {
+        tail.next = new Node(data, imageFull, imageTn);
         tail = tail.next;
         size++;
     }

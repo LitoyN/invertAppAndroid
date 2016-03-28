@@ -12,15 +12,15 @@ import android.widget.BaseAdapter;
  */
 public class ImageAdapter extends BaseAdapter {
     private Context mContext;
-    private Integer[] mThumbIds;
+    private int[] helpImageArray;
 
-    public ImageAdapter(Context c, Integer[] imageArray) {
+    public ImageAdapter(Context c, int[] imageArray) {
         mContext = c;
-        mThumbIds = imageArray;
+        helpImageArray = imageArray;
     }
 
     public int getCount() {
-        return mThumbIds.length;
+        return helpImageArray.length;
     }
 
     public Object getItem(int position) {
@@ -44,12 +44,12 @@ public class ImageAdapter extends BaseAdapter {
             imageView = (ImageView) convertView;
         }
 
-        imageView.setImageResource(mThumbIds[position]);
+        imageView.setImageResource(helpImageArray[position]);
         return imageView;
     }
 
     // references to our images
-    /**private Integer[] mThumbIds = {
+    /**private Integer[] helpImageArray = {
             R.drawable.tn1,R.drawable.tn2,
             R.drawable.tn3, R.drawable.tn4,
             R.drawable.tn5, R.drawable.tn6,
