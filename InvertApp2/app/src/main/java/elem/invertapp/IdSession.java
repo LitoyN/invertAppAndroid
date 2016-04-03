@@ -1,10 +1,13 @@
 package elem.invertapp;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
@@ -17,7 +20,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class IdSession extends AppCompatActivity {
+public class IdSession extends AppCompatActivity implements AdapterView.OnItemClickListener{
+
 
     public static final String[] imageFiles = {
             "wingpad.jpg",
@@ -130,7 +134,6 @@ public class IdSession extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_id_session);
         defaultTn = getResources().getIdentifier(defaultTnFile, "drawable", getPackageName());
         defaultFull = getResources().getIdentifier(defaultFullFile, "drawable", getPackageName());
@@ -321,6 +324,7 @@ public class IdSession extends AppCompatActivity {
             int counter = 0;
             String[] idArray = new String[idTree.size()];
             int[] imageFileArray = new int[idTree.size()];
+            int[] imageFileArrayFull = new int[idTree.size()];
             int count2 = 1;
             System.out.println("size of idtree: " + idTree.size());
             while (counter < idTree.size()) {
@@ -328,39 +332,23 @@ public class IdSession extends AppCompatActivity {
                 count2++;
                 idArray[counter] = idTree.get(counter);
                 imageFileArray[counter] = idTree.getImageTn(counter);
+                imageFileArrayFull[counter] = idTree.getImageTn(counter);
                 //System.out.println(idArray[counter - 1]);
                 counter++;
             }
 
-            //ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.listview_layout1, idList);
             GridView gridView = (GridView) findViewById(R.id.idGrid);
-            gridView.setAdapter(new GridAdapter(this, idArray, imageFileArray));
-            //gridView.setAdapter(new ImageAdapter(this, imageFileArray));
-            gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                public void onItemClick(AdapterView<?> parent, View v,
-                                        int position, long id) {
-                    Toast.makeText(IdSession.this, "" + position,
-                            Toast.LENGTH_SHORT).show();
-                }
-            });
-            //ListView listView = (ListView) findViewById(R.id.idList);
-            //gridView.setAdapter(adapter);
-            //listView.setAdapter(adapter);
+            gridView.setAdapter(new GridAdapter(this, idArray, imageFileArray, imageFileArrayFull));
+            gridView.setOnItemClickListener(this);
+
             ImageView helpImageView = (ImageView) findViewById(R.id.helpImageView);
             helpImageView.setVisibility(View.INVISIBLE);
         }
         else{
             ((Button) findViewById(R.id.showButton)).setText(R.string.showButtonText);
             GridView gridView = (GridView) findViewById(R.id.idGrid);
-            //ListView listView = (ListView) findViewById(R.id.idList);
             gridView.setAdapter(null);
-            //listView.setAdapter(null);
-            //listView.setOnItemClickListener();
         }
-    }
-
-    public void updateIdList(){
-
     }
 
     public void checkValidQuestion(){
@@ -416,4 +404,17 @@ public class IdSession extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+        Intent intent = new Intent(this, ResultDialog.class);
+        GridViewHolder holder = (GridViewHolder) view.getTag();
+        TextView tempId = (TextView) holder.mTextView.getTag();
+        intent.putExtra("resultImage",idImagesFull[position]);
+        intent.putExtra("resultID", idList.get(position));
+        startActivity(intent);
+    }
+
+
 }

@@ -4,6 +4,7 @@ import android.media.Image;
 import android.view.View;
 import android.widget.GridView;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
@@ -13,11 +14,12 @@ import org.w3c.dom.Text;
  */
 public class GridViewHolder {
 
-    ImageButton mImageButton;
+    ImageView mImageButton;
+    int imageId;
     TextView mTextView;
 
     GridViewHolder(View v){
-        mImageButton = (ImageButton) v.findViewById(R.id.gridIdImageTn);
+        mImageButton = (ImageView) v.findViewById(R.id.gridIdImageTn);
         mTextView = (TextView) v.findViewById(R.id.gridIdTextView);
 
     }

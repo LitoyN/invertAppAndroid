@@ -11,6 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="30sp"
         android:text="@string/IdSessionHeader"
         android:id="@+id/textView"
         android:layout_alignParentTop="true"
@@ -19,6 +20,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="30sp"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/questionsText"
         android:id="@+id/questionsText"
@@ -26,91 +28,110 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="40dp" />
 
-    <Button
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/yesButtonText"
-        android:id="@+id/yesButton"
-        android:layout_marginBottom="60dp"
-        android:onClick="yesButtonClick"
         android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/showButton"
-        android:layout_alignEnd="@+id/showButton" />
+        android:orientation="vertical"
+        android:gravity="bottom"
+        android:id="@+id/buttonsLayout">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/noButtonText"
-        android:id="@+id/noButton"
-        android:layout_alignTop="@+id/yesButton"
-        android:layout_centerHorizontal="true"
-        android:onClick="noButtonClick"/>
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="3">
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:text="@string/yesButtonText"
+                android:textSize="24sp"
+                android:id="@+id/yesButton"
+                android:onClick="yesButtonClick"
+                android:layout_weight="1"/>
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/nsButtonText"
-        android:id="@+id/nsButton"
-        android:layout_alignTop="@+id/noButton"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:onClick="nsButtonClick"/>
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:text="@string/noButtonText"
+                android:textSize="24sp"
+                android:id="@+id/noButton"
+                android:onClick="noButtonClick"
+                android:layout_weight="1"/>
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/showButtonText"
-        android:id="@+id/showButton"
-        android:layout_alignTop="@+id/helpButton"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:onClick="showButtonClick"/>
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:textSize="24sp"
+                android:text="@string/nsButtonText"
+                android:id="@+id/nsButton"
+                android:onClick="nsButtonClick"
+                android:layout_weight="1"/>
+        </LinearLayout>
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/helpButtonText"
-        android:id="@+id/helpButton"
-        android:layout_below="@+id/noButton"
-        android:layout_centerHorizontal="true"
-        android:onClick="helpButtonClick"/>
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="3">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/startOverButtonText"
-        android:id="@+id/startOverButton"
-        android:layout_below="@+id/nsButton"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:onClick="startOverButtonClick"/>
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:textSize="24sp"
+                android:text="@string/showButtonText"
+                android:id="@+id/showButton"
+                android:onClick="showButtonClick"
+                android:layout_weight="1"/>
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/helpImageView"
-        android:layout_above="@+id/yesButton"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:minWidth="350dp"
-        android:minHeight="250dp" />
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:textSize="24sp"
+                android:text="@string/helpButtonText"
+                android:id="@+id/helpButton"
+                android:onClick="helpButtonClick"
+                android:layout_weight="1"/>
 
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:textSize="24sp"
+                android:text="@string/startOverButtonText"
+                android:id="@+id/startOverButton"
+                android:onClick="startOverButtonClick"
+                android:layout_weight="1"/>
+        </LinearLayout>
+
+
+    </LinearLayout>
     <GridView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/idGrid"
-        android:layout_alignTop="@id/questionsText"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="50dp"
+        android:layout_below="@id/questionsText"
+        android:layout_marginTop="20dp"
         android:verticalSpacing="30dp"
         android:horizontalSpacing="20dp"
         android:columnWidth="250dp"
         android:numColumns="auto_fit"
         android:stretchMode="spacingWidthUniform"
-        android:layout_above="@+id/yesButton"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_above="@+id/buttonsLayout" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/helpImageView"
+        android:layout_below="@id/questionsText"
+        android:layout_above="@id/buttonsLayout"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:minWidth="350dp"
+        android:minHeight="250dp"
+        android:focusable="false"
+        android:focusableInTouchMode="false"/>
+
+
+
 
 
 </RelativeLayout>

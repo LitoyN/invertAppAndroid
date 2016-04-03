@@ -1,34 +1,57 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".StartScreen">
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:weightSum="3"
+    android:orientation="horizontal"
+    tools:context=".StartScreen">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/startButtonText"
-        android:id="@+id/startIDbutton"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="150dp"
-        android:textSize="24sp"
-        android:onClick="startIdButtonClick" />
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/browseButtonText"
-        android:id="@+id/browseButton"
-        android:textSize="24sp"
-        android:layout_below="@+id/startIDbutton"
-        android:layout_centerHorizontal="true" />
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/aboutButtonText"
-        android:id="@+id/aboutButton"
-        android:textSize="24sp"
-        android:layout_below="@+id/browseButton"
-        android:layout_centerHorizontal="true" />
-</RelativeLayout>
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight=".5">
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:orientation="vertical"
+        android:gravity="center">
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/startButtonText"
+            android:id="@+id/startIDbutton"
+            android:textSize="30sp"
+            android:onClick="startIdButtonClick"
+            android:layout_margin="10dp"/>
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/browseButtonText"
+            android:id="@+id/browseButton"
+            android:textSize="30sp"
+            android:layout_margin="10dp"/>
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/aboutButtonText"
+            android:id="@+id/aboutButton"
+            android:textSize="30sp"
+            android:layout_margin="10dp"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight=".5">
+
+    </LinearLayout>
+</LinearLayout>

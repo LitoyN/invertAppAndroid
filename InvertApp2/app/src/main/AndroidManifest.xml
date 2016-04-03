@@ -21,6 +21,11 @@
             android:name=".IdSession"
             android:label="@string/title_activity_id_session" >
         </activity>
+        <activity
+            android:theme="@android:style/Theme.Dialog"
+            android:name=".ResultDialog"
+            android:label="@string/title_activity_result_dialog" >
+        </activity>
     </application>
 
 </manifest>
