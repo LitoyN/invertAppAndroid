@@ -111,7 +111,7 @@
         android:layout_below="@id/questionsText"
         android:layout_marginTop="20dp"
         android:verticalSpacing="30dp"
-        android:horizontalSpacing="20dp"
+        android:horizontalSpacing="10dp"
         android:columnWidth="250dp"
         android:numColumns="auto_fit"
         android:stretchMode="spacingWidthUniform"

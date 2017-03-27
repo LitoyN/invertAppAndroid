@@ -18,7 +18,7 @@
     <string name="showButtonText">Show IDs</string>
     <string name="hideButtonText">Hide IDs</string>
     <string name="helpButtonText">Help</string>
-    <string name="startOverButtonText">Start Over</string>
+    <string name="startOverButtonText">Reset</string>
 
     <color name="green">#00CD00</color>
     <color name="white">#FFFFFF</color>

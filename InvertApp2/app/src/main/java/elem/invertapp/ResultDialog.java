@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -18,14 +19,15 @@ public class ResultDialog extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result_dialog);
+        getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         Intent intent = getIntent();
-        if(intent != null){
-            int imageId = intent.getIntExtra("resultImage",R.drawable.defaultfull);
+        if (intent != null){
+            int imageId = intent.getIntExtra("resultImage", R.drawable.defaultfull);
             String resultId = intent.getStringExtra("resultID");
-            ImageView resultImageView = (ImageView) findViewById(R.id.resultImageView);
+            TouchImageView resultTouchView = (TouchImageView) findViewById(R.id.resultImageTouchView);
             TextView resultTextView = (TextView) findViewById(R.id.resultText);
             resultTextView.setText(resultId);
-            resultImageView.setImageResource(imageId);
+            resultTouchView.setImageResource(imageId);
 
         }
     }

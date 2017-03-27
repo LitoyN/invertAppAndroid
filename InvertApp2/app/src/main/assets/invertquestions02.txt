@@ -1,0 +1,25 @@
+Does the specimen have jointed appendages?
+Are there wings or wing pads present?
+Was the specimen found in a lotic environment (river or stream)?
+Was the specimen found in a lentic environment (lake or pond)?
+Is the head distinct and well developed?
+Are the antennae visible and protrude from the head?
+Are there visible, distinct eyes?
+Do the mouthparts have an elongated beak/sucker?
+Does one of the mouthparts cover the rest of the mouth from below?
+Is the specimen contained in an organic, silk, or mineral case?
+Is the body deeply lobed?
+Are the antennae adapted for grasping?
+Are there lateral filaments extending from the abdomen?
+Are there external gills present on the abdomen?
+Are there external gills present on the thorax?
+Are there any distinct abdominal processes present?
+Are the abdominal processes hooked?
+Is there one distinct abdominal process?
+Are there two distinct abdominal processes?
+Are there three distinct abdominal processes?
+Is the body at least 3 times as long as it is wide?
+Is the body noticeably flattened/streamlined?
+Is the back of the specimen strongly patterned?
+Are the front legs raptorial?
+Are there fan-like mouth brushes on head?

@@ -66,69 +66,57 @@ public class IdSession extends AppCompatActivity implements AdapterView.OnItemCl
 
     };
     public static final String[] imageFiles2 = {
-            "wingpad",
-            "slenderbody",
-            "stoutbody",
-            "longbody",
+            "jointedappendages",
+            "lobed",
+            "graspingantennae",
+            "mouthbrushes",
+            "lobedabdomen",
+            "shortbroadthorax",
+            "wingpads",
             "defaultimg",
             "defaultimg",
-            "defaultimg",
-            "externalgills",
-            "abdominalgills",
-            "thoracicgills",
-            "filamentousgills",
-            "plategills",
             "distincthead",
             "antennae",
-            "jointedappendages",
+            "visibleeyes",
+            "elongatesucker",
+            "modifiedlabium",
+            "cases",
+            "lateralfilaments",
+            "abdominalgills",
+            "thoracicgills",
             "abdominalprocesses",
-            "terminalhairs",
+            "abdominalhooks",
             "oneprocess",
             "twoprocesses",
             "threeprocesses",
-            "plusprocesses",
-            "tailprocesses",
             "defaultimg",
-            "leafprocesses",
-            "defaultimg",
+            "streamlined",
             "patterned",
-            "distincteye",
-            "fanhead",
-            "softbody",
-            "hardbody",
-            "suckingmouth",
-            "labium",
-            "pairedclaws",
-            "singleclaw",
-            "cases",
-            "deeplylobed",
-            "broadthorax",
-            "graspingantennae",
-            "defaultimg"
-
+            "raptoriallegs"
     };
 
-    public static final int numAttributes = 38;
+    public static final int numAttributes = 27;
     public static final String[] QUESTIONlabels = new String[numAttributes];
-    public static final String filePath = "HelpImages2/";
-    public static final String questionsPath = "questions.txt";
-    public static final String idsPath = "invertAppInfoMSDOS3.txt";
+    public static final String questionsPath = "invertquestions04.txt";
+    public static final String idsPath = "invertresponses04.txt";
+
     InputStream dataFileStream;
     InputStream questionFileStream;
     Scanner dataFile;
     Scanner questionFile;
-    IdList idTree;
-    AttributeList attributeTree;
-    List<String> idList = new ArrayList<String>();
-    int[] idImagesTn;
-    int[] idImagesFull;
+
+    ArrayList<Identification> identificationList;
+    List<String> idList;
+
     String defaultTnFile = "defaulttn";
     String defaultFullFile = "defaultfull";
     int defaultTn;
     int defaultFull;
+
     int questionCount;
     int currentAttribute;
     int hideShowStatus;
+    boolean sessionEnd;
 
 
     @Override
@@ -137,15 +125,16 @@ public class IdSession extends AppCompatActivity implements AdapterView.OnItemCl
         setContentView(R.layout.activity_id_session);
         defaultTn = getResources().getIdentifier(defaultTnFile, "drawable", getPackageName());
         defaultFull = getResources().getIdentifier(defaultFullFile, "drawable", getPackageName());
-        questionCount = 0;
-        hideShowStatus = -1;
         initTrees();
         checkValidQuestion();
     }
 
     private void initTrees(){
-        idTree = new IdList();
-        attributeTree = new AttributeList();
+        identificationList = new ArrayList<>();
+        idList = new ArrayList<>();
+        questionCount = 0;
+        hideShowStatus = -1;
+        sessionEnd = false;
         try{
             dataFileStream = getAssets().open(idsPath);
 
@@ -164,25 +153,31 @@ public class IdSession extends AppCompatActivity implements AdapterView.OnItemCl
         parseData();
     }
 
-    private void parseData(){
-        int[] attributeInt= new int[numAttributes];
+    private void parseData() {
+
         int counter = 0;
         int colonInt;
         int startInt;
-        String tempId ="";
+
+        String tempId;
         String tempIdFull;
         String tempIdTn;
-        while(dataFile.hasNextLine()){
+        int imageFullInt;
+        int imageTnInt;
 
+        while (dataFile.hasNextLine()) {
+            System.out.println("Entered while loop");
+            int[] attributeArray = new int[numAttributes];
             startInt = 0;
             tempId = dataFile.next();
+            System.out.println("Parsing: " + tempId);
 
-            if(tempId.contains(":")){
+            if (tempId.contains(":")) {
 
                 String tempId2 = "";
                 colonInt = tempId.indexOf(':');
 
-                while(tempId.substring(startInt).contains(":")){
+                while (tempId.substring(startInt).contains(":")) {
                     tempId2 = tempId2 + tempId.substring(startInt, colonInt + 1) + " ";
                     startInt = colonInt + 1;
                     colonInt = startInt + tempId.substring(startInt).indexOf(':');
@@ -192,84 +187,81 @@ public class IdSession extends AppCompatActivity implements AdapterView.OnItemCl
                 tempId = tempId2;
 
             }
-
-            idList.add(tempId);
-
-            for(int i=0; i<numAttributes; i++){
-                attributeInt[i]=dataFile.nextInt();
-            }
-
-            attributeTree.add(attributeInt);
-            counter++;
-
-        }
-
-        idImagesTn = new int[counter];
-        idImagesFull = new int[counter];
-        for(int i = 0; i < counter; i++){
-            tempId = idList.get(i);
+            //*****tempId set for idName*****
             tempIdFull = tempId.toLowerCase();
-            tempIdFull = tempIdFull.replace(":","");
+            tempIdFull = tempIdFull.replace(":", "");
             tempIdFull = tempIdFull.replace(" ", "");
+            System.out.println(tempIdFull);
             tempIdTn = tempIdFull + "tn";
-            System.out.println("tempid: " + tempId);
-            System.out.println("tempidtn: " + tempIdTn);
-            idImagesTn[i] = getResources().getIdentifier(tempIdTn, "drawable", getPackageName());
-            idImagesFull[i] = getResources().getIdentifier(tempId, "drawable", getPackageName());
-            if(idImagesTn[i] == 0){
-                idImagesTn[i] = defaultTn;
+            //*****tempIdFull set for searchging for imageFull*****
+            //*****tempIdTn set for searching for imageTn*****
+            imageFullInt = getResources().getIdentifier(tempIdFull, "drawable", getPackageName());
+            imageTnInt = getResources().getIdentifier(tempIdTn, "drawable", getPackageName());
+            if (imageFullInt == 0) {
+                imageFullInt = defaultFull;
             }
-            if(idImagesFull[i] == 0){
-                idImagesFull[i] = defaultFull;
+            if (imageTnInt == 0) {
+                imageTnInt = defaultTn;
             }
-            idTree.add(tempId, idImagesFull[i], idImagesTn[i]);
-            System.out.println(idImagesTn[i]);
+            //*****imageFullInt set for imageFull*****
+            //*****imageTnInt set for imageTn*****
+            for (int i = 0; i < numAttributes; i++) {
+                attributeArray[i] = dataFile.nextInt();
+            }
+            //*****attributeArray set for attributeResponses*****
+            Identification identification = new Identification(tempId, imageFullInt, imageTnInt, attributeArray);
+            identificationList.add(identification);
         }
-        counter=0;
-        while(questionFile.hasNextLine()){
-            QUESTIONlabels[counter]=questionFile.nextLine();
+        counter = 0;
+        while (questionFile.hasNextLine()) {
+            QUESTIONlabels[counter] = questionFile.nextLine();
+            System.out.println("Question Number: " + counter);
             System.out.println(QUESTIONlabels[counter]);
             counter++;
         }
         System.out.println("DATA PARSING COMPLETE");
-        for(int i = 0; i < idList.size(); i++){
-            System.out.println(idList.get(i));
+        for (int i = 0; i < identificationList.size(); i++) {
+            System.out.println(identificationList.get(i).getIdName());
         }
     }
 
     public void yesButtonClick(View view){
-        for(int j=0;j<idTree.size();j++){
-            if((attributeTree.get(j)[questionCount-1]==0)){
-                System.out.println("Removing: " + idTree.get(j));
-                attributeTree.remove(j);
-                idTree.remove(j);
-                j--;
-            }//end if attribute false then remove
-        }//end for whole idTree
-        checkValidQuestion();
-        ImageView helpImageView = (ImageView) findViewById(R.id.helpImageView);
-        helpImageView.setVisibility(View.INVISIBLE);
+        if(!sessionEnd) {
+            for (int j = 0; j < identificationList.size(); j++) {
+                if ((identificationList.get(j).getAttributeResponses()[questionCount - 1] == 0)) {
+                    System.out.println("Removing: " + identificationList.get(j).getIdName());
+                    identificationList.remove(j);
+                    j--;
+                }//end if attribute false then remove
+            }//end for whole idTree
+            checkValidQuestion();
+            ImageView helpImageView = (ImageView) findViewById(R.id.helpImageView);
+            helpImageView.setVisibility(View.INVISIBLE);
+        }
     }
 
     public void noButtonClick(View view){
-        for(int j=0;j<idTree.size();j++){
-            if((attributeTree.get(j)[questionCount-1]==1)){
-                System.out.println("Removing: " + idTree.get(j));
-                attributeTree.remove(j);
-                idTree.remove(j);
-                j--;
-            }//end if attribute false then remove
-        }//end for whole idTree
-        checkValidQuestion();
-        ImageView helpImageView = (ImageView) findViewById(R.id.helpImageView);
-        helpImageView.setVisibility(View.INVISIBLE);
+        if(!sessionEnd) {
+            for (int j = 0; j < identificationList.size(); j++) {
+                if ((identificationList.get(j).getAttributeResponses()[questionCount - 1] == 1)) {
+                    System.out.println("Removing: " + identificationList.get(j).getIdName());
+                    identificationList.remove(j);
+                    j--;
+                }//end if attribute false then remove
+            }//end for whole idTree
+            checkValidQuestion();
+            ImageView helpImageView = (ImageView) findViewById(R.id.helpImageView);
+            helpImageView.setVisibility(View.INVISIBLE);
+        }
     }
 
     public void nsButtonClick(View view){
-        questionCount++;
-        checkValidQuestion();
-        ImageView helpImageView = (ImageView) findViewById(R.id.helpImageView);
-        helpImageView.setVisibility(View.INVISIBLE);
+        if(!sessionEnd) {
+            questionCount++;
+            checkValidQuestion();
+            ImageView helpImageView = (ImageView) findViewById(R.id.helpImageView);
+            helpImageView.setVisibility(View.INVISIBLE);
+        }
     }
 
     public void showButtonClick(View view){
@@ -279,25 +271,23 @@ public class IdSession extends AppCompatActivity implements AdapterView.OnItemCl
     }
 
     public void helpButtonClick(View view){
-
-        int imageResource = getResources().getIdentifier(imageFiles2[questionCount-1],"drawable",this.getPackageName());
-        System.out.println(imageFiles2[questionCount-1]);
-        System.out.println(questionCount);
-        ImageView helpImageView = (ImageView) findViewById(R.id.helpImageView);
-        helpImageView.setImageResource(imageResource);
-        hideShowStatus = -1;
-        showMe();
-        if(helpImageView.getVisibility() == View.VISIBLE) {
-            helpImageView.setVisibility(View.INVISIBLE);
+        if(!sessionEnd) {
+            int imageResource = getResources().getIdentifier(imageFiles2[questionCount - 1], "drawable", this.getPackageName());
+            System.out.println(imageFiles2[questionCount - 1]);
+            System.out.println(questionCount);
+            ImageView helpImageView = (ImageView) findViewById(R.id.helpImageView);
+            helpImageView.setImageResource(imageResource);
+            hideShowStatus = -1;
+            showMe();
+            if (helpImageView.getVisibility() == View.VISIBLE) {
+                helpImageView.setVisibility(View.INVISIBLE);
+            } else if (helpImageView.getVisibility() == View.INVISIBLE) {
+                helpImageView.setVisibility(View.VISIBLE);
+            }
         }
-        else if(helpImageView.getVisibility() == View.INVISIBLE){
-            helpImageView.setVisibility(View.VISIBLE);
-        }
-
     }
 
     public void startOverButtonClick(View view){
-        questionCount=0;
         initTrees();
         checkValidQuestion();
         ImageView helpImageView = (ImageView) findViewById(R.id.helpImageView);
@@ -305,6 +295,7 @@ public class IdSession extends AppCompatActivity implements AdapterView.OnItemCl
     }
 
     public void endSession(){
+        sessionEnd = true;
         ((TextView) findViewById(R.id.questionsText)).setText(R.string.endOfId);
         ((Button) findViewById(R.id.showButton)).setText(R.string.hideButtonText);
         hideShowStatus = 1;
@@ -313,7 +304,7 @@ public class IdSession extends AppCompatActivity implements AdapterView.OnItemCl
 
     public void checkAnswerFound(){
         //System.out.println("Question Count: " + questionCount);
-        if(idTree.size()<=1 || questionCount>=numAttributes){
+        if(identificationList.size()<=1 || questionCount>=numAttributes){
             endSession();
         }
     }
@@ -322,23 +313,19 @@ public class IdSession extends AppCompatActivity implements AdapterView.OnItemCl
         if(hideShowStatus == 1) {
             ((Button) findViewById(R.id.showButton)).setText(R.string.hideButtonText);
             int counter = 0;
-            String[] idArray = new String[idTree.size()];
-            int[] imageFileArray = new int[idTree.size()];
-            int[] imageFileArrayFull = new int[idTree.size()];
-            int count2 = 1;
-            System.out.println("size of idtree: " + idTree.size());
-            while (counter < idTree.size()) {
-                System.out.println("num of times into while loop: " + count2);
-                count2++;
-                idArray[counter] = idTree.get(counter);
-                imageFileArray[counter] = idTree.getImageTn(counter);
-                imageFileArrayFull[counter] = idTree.getImageTn(counter);
-                //System.out.println(idArray[counter - 1]);
+            String[] idArray = new String[identificationList.size()];
+            int[] imageFileArray = new int[identificationList.size()];
+            int[] imageFileArrayFull = new int[identificationList.size()];
+            System.out.println("size of idtree: " + identificationList.size());
+            while (counter < identificationList.size()) {
+                idArray[counter] = identificationList.get(counter).getIdName();
+                imageFileArrayFull[counter] = identificationList.get(counter).getImageFull();
+                imageFileArray[counter] = identificationList.get(counter).getImageTn();
                 counter++;
             }
 
             GridView gridView = (GridView) findViewById(R.id.idGrid);
-            gridView.setAdapter(new GridAdapter(this, idArray, imageFileArray, imageFileArrayFull));
+            gridView.setAdapter(new GridAdapter(this, identificationList));
             gridView.setOnItemClickListener(this);
 
             ImageView helpImageView = (ImageView) findViewById(R.id.helpImageView);
@@ -358,12 +345,16 @@ public class IdSession extends AppCompatActivity implements AdapterView.OnItemCl
 
         while(!validQuestion && questionCount<numAttributes){
 
-            currentAttribute= attributeTree.get(0)[questionCount];
+            for(int i = 0; i < numAttributes; i++) {
+                System.out.print(identificationList.get(0).getAttributeResponses()[i] + " ");
+            }
+            System.out.println();
+            currentAttribute= identificationList.get(0).getAttributeResponses()[questionCount];
 
             //check if question is useful to ask (if it reduces entropy)
-            int i=0;
-            while(i<idTree.size() && !validQuestion){
-                if(attributeTree.get(i)[questionCount]!=currentAttribute){
+            int i=1;
+            while(i < identificationList.size() && !validQuestion){
+                if(identificationList.get(i).getAttributeResponses()[questionCount]!= currentAttribute){
                     validQuestion=true;
                 }
                 i++;
@@ -411,8 +402,9 @@ public class IdSession extends AppCompatActivity implements AdapterView.OnItemCl
         Intent intent = new Intent(this, ResultDialog.class);
         GridViewHolder holder = (GridViewHolder) view.getTag();
         TextView tempId = (TextView) holder.mTextView.getTag();
-        intent.putExtra("resultImage",idImagesFull[position]);
-        intent.putExtra("resultID", idList.get(position));
+        System.out.println("name: " + identificationList.get(position).getIdName());
+        intent.putExtra("resultImage",identificationList.get(position).getImageFull());
+        intent.putExtra("resultID", identificationList.get(position).getIdName());
         startActivity(intent);
     }
 

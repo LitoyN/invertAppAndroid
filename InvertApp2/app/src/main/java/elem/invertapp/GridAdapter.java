@@ -1,54 +1,42 @@
 package elem.invertapp;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ImageButton;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.BaseAdapter;
+
 
 import java.util.ArrayList;
 
 /**
  * Created by elliot on 3/28/2016.
  */
-
-class Identification{
-    int imageTn;
-    String idName;
-    int imageFull;
-
-    Identification(String idName, int imageTn, int imageFull){
-        this.idName = idName;
-        this.imageTn = imageTn;
-        this.imageFull = imageFull;
-    }
-}
-
-public class GridAdapter extends ArrayAdapter<String> {
+public class GridAdapter extends BaseAdapter {
     private Context mContext;
-    private int[] imageArray;
-    private String[] idArray;
-    private int[]imageArrayFull;
     private ArrayList<Identification> idList;
 
 
-    public GridAdapter(Context c, String[] idArray, int[] imageArray, int[] imageArrayFull) {
+    public GridAdapter(Context c, ArrayList<Identification> identificationList) {
 
-        super(c, R.layout.gridcelllayout, R.id.gridIdTextView, idArray);
+        //super(c, R.layout.gridcelllayout, R.id.gridIdTextView, idArray);
         mContext = c;
-        this.imageArray = imageArray;
-        this.idArray = idArray;
-        this.imageArrayFull = imageArrayFull;
-        idList = new ArrayList<>();
-        for(int i = 0; i < idArray.length; i++){
-            Identification tempId = new Identification(idArray[i], imageArray[i], imageArrayFull[i]);
-            idList.add(tempId);
-        }
+        idList = identificationList;
+    }
+
+    @Override
+    public int getCount() {
+        return idList.size();
+    }
+
+    @Override
+    public Object getItem(int position) {
+        return idList.get(position);
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
     }
 
     // create a new ImageView for each item referenced by the Adapter
@@ -68,8 +56,8 @@ public class GridAdapter extends ArrayAdapter<String> {
         }
 
         Identification temp = idList.get(position);
-        holder.mTextView.setText(temp.idName);
-        holder.mImageButton.setImageResource(temp.imageTn);
+        holder.mTextView.setText(temp.getIdName());
+        holder.mImageButton.setImageResource(temp.getImageTn());
 
         return cell;
     }

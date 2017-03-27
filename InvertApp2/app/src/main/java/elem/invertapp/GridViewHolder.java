@@ -15,7 +15,6 @@ import org.w3c.dom.Text;
 public class GridViewHolder {
 
     ImageView mImageButton;
-    int imageId;
     TextView mTextView;
 
     GridViewHolder(View v){
